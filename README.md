@@ -12,6 +12,11 @@
 - to build a serverless, progressive web application (PWA) with React using a
 test-driven development (TDD) technique
 - app uses the Google Calendar API to fetch upcoming events
+- USAGE:
+  - Backend Maintenance: Eliminate the need for backend maintenance, as serverless functions handle data retrieval from the Google Calendar API.
+  - Scalability: Serverless architecture allows for easy scaling, ensuring the application can handle increased traffic and demands.
+  - Cost-Efficiency: Pay only for actual function execution time, avoiding costs for idle time.
+  - Availability: The serverless approach ensures the application is always available to users.
 
 ## key features
 - filter events by city
