@@ -37,7 +37,7 @@ module.exports.getAuthURL = async () => {
 //get AccessToken
 module.exports.getAccessToken = async (e) => {
   // Decode authorization code extracted from the URL query
-  const code = decodeURIComponent(`${event.pathParameters.code}`);
+  const code = decodeURIComponent(`${e.pathParameters.code}`);
 
   return new Promise((resolve, reject) => {
     /**
