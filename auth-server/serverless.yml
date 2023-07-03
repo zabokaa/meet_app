@@ -2,7 +2,7 @@ service: auth-server
 provider:
   name: aws
   runtime: nodejs18.x
-  region: eu-norht-01
+  region: eu-north-1
   timeout: 30 # by default 6s
   environment:
     CLIENT_ID: ${file(config.json):CLIENT_ID}
