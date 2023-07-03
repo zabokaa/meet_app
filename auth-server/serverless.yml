@@ -18,6 +18,12 @@ functions:
           path: api/get-auth-url
           method: get
 # get temp access token
+  getAccessToken:
+    handler: handler.getAccessToken
+    events:
+      - http:
+          path: api/token/{code}
+          method: get
 
 # use token
 
