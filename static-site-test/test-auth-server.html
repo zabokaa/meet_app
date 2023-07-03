@@ -21,11 +21,24 @@
   
       <main id="container">
         <h1>OAuth2 Test</h1>
-          <h4><b>Step 1:</b> Get the Auth URL</h4>
+          <h4><b>Step 1: </b> Get the OAuth URL</h4>
           <p>Click the button below to get your auth url.</p>
           <button id="getAuthUrlButton">Get OAuth URL</button>
           <p id="result"></p>
           <a id="authURL" href target="_blank">Click to authorize</a>
+
+          <h4><b>Step 2: </b>Get your code and exchange for an access token</h4>
+          <p>
+            After you are redirected back to your MEET app on GitHub, copy the code
+            from the URI.
+          </p>
+          <br />
+          <label
+            >Code input
+            <input id="code" type="text" value="" />
+          </label>
+          <button id="getToken">Get Token</button>
+          <p id="accessToken"></p>  
       </main>
       
       <script type="text/javascript">
@@ -48,6 +61,28 @@
               resultLink.href = authUrl;
             });
         };
+        // STEP 2 getting TOKEN:
+        const codeValue = document.getElementById("code");
+      const getAccessToken = document.getElementById("getToken");
+      const accessTokenElement = document.getElementById("accessToken");
+      const getToken = "https://8hhtjxy3sb.execute-api.eu-north-1.amazonaws.com/dev/api/token";
+
+      getAccessToken.onclick = function () {
+        let code = codeValue.value;
+
+        // if the authorization code is not URL-encoded, then URL-encode it.
+        if (decodeURIComponent(code) === code) {
+          code = encodeURIComponent(codeValue.value);
+        }
+        const getTokenRequest = getToken +  "/" + code;
+        fetch(getTokenRequest)
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (json) {
+            accessTokenElement.innerText = JSON.stringify(json);
+          });
+      };
       </script>
 
   </body>
