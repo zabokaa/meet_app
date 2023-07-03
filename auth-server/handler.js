@@ -70,4 +70,38 @@ module.exports.getAccessToken = async (e) => {
         body: JSON.stringify(error),
       };
     });
-}
+};
+
+// get Calendar Events:
+module.exports.getCalendarEvents = async (e) => {
+
+  const code = decodeURIComponent(`${e.pathParameters.code}`);
+
+  return new Promise((resolve, reject) => {
+
+    oAuth2Client.getEvents(code, (error, response) => {
+      if (error) {
+        return reject(error);
+      }
+      return resolve(response);
+    });
+  })
+    .then((results) => {
+      // Respond with OAuth token 
+      return {
+        statusCode: 200,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': true,
+        },
+        body: JSON.stringify(results),
+      };
+    })
+    .catch((error) => {
+      // Handle error
+      return {
+        statusCode: 500,
+        body: JSON.stringify(error),
+      };
+    });
+};
