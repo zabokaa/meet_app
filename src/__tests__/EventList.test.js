@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import EventList from '../components/EventList';
 
+
 describe('<EventList /> component', () => {
  let EventListComponent;
  beforeEach(() => {
