@@ -1,6 +1,6 @@
 const Event = () => {
     return (
-      <li></li>
+      <li className="event"></li>
     );
   }
   
