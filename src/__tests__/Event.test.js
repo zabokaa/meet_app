@@ -29,11 +29,12 @@ describe('<Event /> component', () => {
       expect(EventComponent.queryByText('show details')).toBeInTheDocument();
     });
   
-    test("by default, event's details section should be hidden", () => {
+    // SCENARIOS
+    test('event element is collapsed by default', () => {
       expect(EventComponent.container.querySelector('.details')).not.toBeInTheDocument();
     });
   
-    test("shows the details section when the user clicks on the 'show details' button", async () => {
+    test('user clicks on the event element Then the event details should be displayed', async () => {
       const user = userEvent.setup();
       await user.click(EventComponent.queryByText('show details'));
   
@@ -42,7 +43,7 @@ describe('<Event /> component', () => {
       expect(EventComponent.queryByText('show details')).not.toBeInTheDocument();
     });
   
-    test("hides the details section when the user clicks on the 'hide details' button", async () => {
+    test('User can collapse an event to hide its details', async () => {
       const user = userEvent.setup();
   
       await user.click(EventComponent.queryByText('show details'));
