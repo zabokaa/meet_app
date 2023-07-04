@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import CitySearch from '../components/CitySearch';
 
 // test that involves user interactions, always start with setting up the object
-// const user = userEvent.setup();
+// BUT not use it outside the test !!!
 
 describe('<CitySearch /> component', () => {
   test('renders text input', () => {
@@ -27,4 +27,28 @@ describe('<CitySearch /> component', () => {
     expect(suggestionList).toBeInTheDocument();
     expect(suggestionList).toHaveClass('suggestions');
   });
+// test if correctly rendered:
+test('updates list of suggestions correctly when user types in city textbox', async () => {
+  const user = userEvent.setup();
+  const allEvents = await getEvents();   //newly created from getEvents func 
+  const allLocations = extractLocations(allEvents);
+  CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
+
+  // user types "Berlin" in city textbox
+  const cityTextBox = CitySearchComponent.queryByRole('textbox');
+  await user.type(cityTextBox, "Berlin");
+
+  // filter allLocations to locations matching "Berlin"
+  const suggestions = allLocations? allLocations.filter((location) => {
+    return location.toUpperCase().indexOf(cityTextBox.value.toUpperCase()) > -1;
+  }): [];
+
+  // get all <li> elements inside the suggestion list
+  const suggestionListItems = CitySearchComponent.queryAllByRole('listitem');
+  expect(suggestionListItems).toHaveLength(suggestions.length + 1);
+  for (let i = 0; i < suggestions.length; i += 1) {      // +1 f "see all cities" addition
+    expect(suggestionListItems[i].textContent).toBe(suggestions[i]);  //check with suggestions array
+  }
+});
+
 });
