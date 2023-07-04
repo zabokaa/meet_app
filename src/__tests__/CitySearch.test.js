@@ -6,12 +6,12 @@ import CitySearch from '../components/CitySearch';
 // const user = userEvent.setup();
 
 describe('<CitySearch /> component', () => {
-//   test('renders text input', () => {
-//     const CitySearchComponent = render(<CitySearch />);
-//     const cityTextBox = CitySearchComponent.queryByRole('textbox');
-//     expect(cityTextBox).toBeInTheDocument();
-//     expect(cityTextBox).toHaveClass('city');
-//   });
+  test('renders text input', () => {
+    const CitySearchComponent = render(<CitySearch />);
+    const cityTextBox = CitySearchComponent.queryByRole('textbox');
+    expect(cityTextBox).toBeInTheDocument();
+    expect(cityTextBox).toHaveClass('city');
+  });
   test('suggestions list is hidden by default', () => {
     const CitySearchComponent = render(<CitySearch />);
     const suggestionList = CitySearchComponent.queryByRole('list');
@@ -22,8 +22,8 @@ describe('<CitySearch /> component', () => {
     const CitySearchComponent = render(<CitySearch />);
     const user = userEvent.setup();
     const cityTextBox = CitySearchComponent.queryByRole('textbox');
-    await user.click(cityTextBox);
-    const suggestionList = CitySearchComponent.queryByRole('list');
+    await user.click(cityTextBox);   //user's input
+    const suggestionList = CitySearchComponent.queryByRole('list');  //suggestions 4 city
     expect(suggestionList).toBeInTheDocument();
     expect(suggestionList).toHaveClass('suggestions');
   });
