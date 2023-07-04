@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import NumberOfEvents from '../components/NumberOfEvents';
+import  UserEvent  from '@testing-library/user-event';
 
 describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsComponent;
@@ -13,4 +14,10 @@ describe('<NumberOfEvents /> component', () => {
     expect(numberTextBox).toHaveValue("32");
   });
 
+  //scenario 2
+  test('user specifies a new number to display the specified number ', async () => {
+    const user = UserEvent.setup();
+    const numberTextBox = NumberOfEventsComponent.queryByRole('textbox');
+    await user.type(numberTextBox, "10")
+  });
 });
