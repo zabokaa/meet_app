@@ -4,7 +4,7 @@ const Event = ({ event }) => {
   const [showDetails, setShowDetails] = useState(false);
   return (
     <li className="event">
-      <h2>{event && event.summary}</h2>
+      <h1>{event && event.summary}</h1>
       <p>{event && event.location}</p>
       <p>{event && (new Date(event.created)).toUTCString()}</p>
       {showDetails ?

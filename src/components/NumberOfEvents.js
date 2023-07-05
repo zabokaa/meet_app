@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const NumberOfEvents = ({ event }) => {
+const NumberOfEvents = ({ }) => {
 
   const [number, setNumber] = useState(32);
 
@@ -11,7 +11,7 @@ const NumberOfEvents = ({ event }) => {
 
   return (
     <div id="number-of-events">
-      <label htmlFor="number-of-events-input">Number of Events: </label>
+      <label htmlFor="number-of-events-input">number of events: </label>
       <input
         type="text"
         id="number-of-events-input"
