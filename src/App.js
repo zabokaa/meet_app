@@ -1,20 +1,16 @@
 import CitySearch from './components/CitySearch';
-import EventList from './components/Event';
+import EventList from './components/EventList';
 import NumberOfEvents from './components/NumberOfEvents';
-
-import { useState, useEffect } from 'react';
-import { extractLocations } from './api';
-import { getEvents } from './api';
+import { useEffect, useState } from 'react';
+import { extractLocations, getEvents } from './api';
 
 import './App.css';
 
-
 const App = () => {
-  //2nd 4 new states:
   const [events, setEvents] = useState([]);
   const [currentNOE, setCurrentNOE] = useState(32);
   const [allLocations, setAllLocations] = useState([]);
-  const [currentCity, setCurrentCity] = useState("See all cities");
+  const [currentCity, setCurrentCity] = useState("see all cities")
 
   useEffect(() => {
     fetchData();
