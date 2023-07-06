@@ -28,3 +28,9 @@ describe('<NumberOfEvents /> component', () => {
     await user.type(numberTextBox, "10")
   });
 });
+
+describe('<NumberOfEvents /> integration', () => {
+  test('renders a list of x events when user is changing input value to x', async () => {
+
+  });
+});
