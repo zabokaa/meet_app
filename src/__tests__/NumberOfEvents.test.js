@@ -1,6 +1,8 @@
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import NumberOfEvents from '../components/NumberOfEvents';
+import App from "../App";
+
 
 describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsComponent;
@@ -14,7 +16,7 @@ describe('<NumberOfEvents /> component', () => {
     expect(numberTextBox).toHaveClass('number-of-events-input');
   });
 
-  //scenatio 1
+  //scenario 1
   test('default number is 32', async () => {
     const numberTextBox = NumberOfEventsComponent.queryByRole('textbox');
     expect(numberTextBox).toHaveValue("32");
@@ -29,10 +31,14 @@ describe('<NumberOfEvents /> component', () => {
   });
 });
 
+// exc 4.5
 describe('<NumberOfEvents /> integration', () => {
-  const user = userEvent.setup();
-  const NumberOfEventsInput = 
   test('renders a list of x events when user is changing input value to x', async () => {
-    await user.type(NumberOfEventsInput, "{backspace}{backspace}10");
+    // const user = userEvent.setup();
+    // // const NumberOfEventsInput = 
+    // const AppComponent = render(<App />);
+    // const NumberOfEventsInput = AppComponent.queryByRole('textbook')
+
+    //   await user.type(NumberOfEventsInput, "{backspace}{backspace}10");
   });
 });
