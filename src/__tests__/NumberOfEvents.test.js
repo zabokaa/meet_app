@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import NumberOfEvents from '../components/NumberOfEvents';
 import App from "../App";
@@ -34,11 +34,15 @@ describe('<NumberOfEvents /> component', () => {
 // exc 4.5
 describe('<NumberOfEvents /> integration', () => {
   test('renders a list of x events when user is changing input value to x', async () => {
-    // const user = userEvent.setup();
-    // // const NumberOfEventsInput = 
-    // const AppComponent = render(<App />);
-    // const NumberOfEventsInput = AppComponent.queryByRole('textbook')
+    render (<App />);
+    const NumberOfEventsInput = screen.getByRole('textbox', {name: /number of events/i });
+    const EventListDOM = screen.getByTestId('event-list');
 
-    //   await user.type(NumberOfEventsInput, "{backspace}{backspace}10");
+      await userEvent.type(NumberOfEventsInput, "{backspace}{backspace}10");
+      await waitFor(() => {
+        const EventListItems = within(EventListDOM).queryAllByRole('listitem');
+        expect(EventListItems.lenght).toBe(10)   
+      })
+      
   });
 });

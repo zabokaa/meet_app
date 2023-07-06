@@ -14,22 +14,26 @@ const App = () => {
 
   useEffect(() => {
     fetchData();
-  }, [currentCity]);
+          {/* adding CurrentNOE */}
+  }, [currentCity, currentNOE]);
 
   const fetchData = async () => {
-    const allEvents = await getEvents();
+          {/* adding CurrentNOE as parameter */}
+    const allEvents = await getEvents(currentNOE);
     const filteredEvents = currentCity === "see all cities" ?
       allEvents :
       allEvents.filter(event => event.location === currentCity)
-    setEvents(filteredEvents.slice(0, currentNOE));
+    setEvents(filteredEvents.slice(0, parseInt(currentNOE)));     //transforming string -> ineger
     setAllLocations(extractLocations(allEvents));
   }
 
   return (
     <div className="App">
       <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
-      <NumberOfEvents currentNOE={currentNOE}/>
-      <EventList events={events} />
+      {/* adding setCurrentNOE as prop */}
+      <NumberOfEvents currentNOE={currentNOE} setCurrentNOE={setCurrentNOE} />  
+      {/* for data-test id added from integration testin */}
+      <EventList events={events} data-testid="event-list" />    
     </div>
   );
 }
