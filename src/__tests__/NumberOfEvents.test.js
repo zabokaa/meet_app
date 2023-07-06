@@ -39,9 +39,12 @@ describe('<NumberOfEvents /> integration', () => {
     const EventListDOM = screen.getByTestId('event-list');
 
       await userEvent.type(NumberOfEventsInput, "{backspace}{backspace}10");
+      // await userEvent.clear(NumberOfEventsInput);
+      // await userEvent.type(NumberOfEventsInput, '10');
+      // await userEvent.type(NumberOfEventsInput, '{enter}')  //triggering input change event ?
       await waitFor(() => {
         const EventListItems = within(EventListDOM).queryAllByRole('listitem');
-        expect(EventListItems.lenght).toBe(10)   
+        expect(EventListItems.length).toBe(10)   
       })
       
   });
