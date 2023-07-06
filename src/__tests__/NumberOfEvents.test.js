@@ -30,7 +30,9 @@ describe('<NumberOfEvents /> component', () => {
 });
 
 describe('<NumberOfEvents /> integration', () => {
+  const user = userEvent.setup();
+  const NumberOfEventsInput = 
   test('renders a list of x events when user is changing input value to x', async () => {
-
+    await user.type(NumberOfEventsInput, "{backspace}{backspace}10");
   });
 });

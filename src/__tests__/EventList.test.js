@@ -9,17 +9,17 @@ describe('<EventList /> component', () => {
   let EventListComponent;
   beforeEach(() => {
     EventListComponent = render(<EventList />);
-  })
+  })    // rendered without any initial props
 
   test('has an element with "list" role', () => {
     expect(EventListComponent.queryByRole("list")).toBeInTheDocument();
-  });
+  });   // checking if there is list element in the compo
 
   test('renders correct number of events', async () => {
     const allEvents = await getEvents();
     EventListComponent.rerender(<EventList events={allEvents} />);
     expect(EventListComponent.getAllByRole("listitem")).toHaveLength(allEvents.length);
-  });
+  });  // checking if component renders a list of 32 events 
 });
 
 describe('<EventList /> integration', () => {
