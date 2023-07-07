@@ -5,7 +5,7 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => {       // need useEffect for NoE as well !!!!
     setSuggestions(allLocations);
   }, [`${allLocations}`]);
 

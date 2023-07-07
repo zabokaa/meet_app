@@ -52,3 +52,5 @@ describe('<App /> integration', () => {
     });
   });
 });
+
+
