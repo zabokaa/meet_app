@@ -42,7 +42,6 @@ describe('<NumberOfEvents /> integration', () => {
     await user.type(NoeInput, '{backspace}{backspace}5');
 
     const EventListDOM = AppDOM.querySelector('#event-list');
-
     const suggestionByNoe = within(EventListDOM).queryAllByRole('listitem');
     expect(suggestionByNoe.length).toBe(5);
   }) 
