@@ -1,7 +1,7 @@
 import CitySearch from './components/CitySearch';
 import EventList from './components/EventList';
 import NumberOfEvents from './components/NumberOfEvents';
-import { useEffect, useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 import { extractLocations, getEvents } from './api';
 
 import './App.css';
@@ -23,12 +23,20 @@ const App = () => {
       allEvents.filter(event => event.location === currentCity)
     setEvents(filteredEvents.slice(0, currentNOE));
     setAllLocations(extractLocations(allEvents));
+
+
   }
 
   return (
     <div className="App">
-      <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
-      <NumberOfEvents setCurrentNOE={setCurrentNOE} />
+      <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} onSearchResult={(value)=>{
+        setCurrentCity(value);}
+      }></CitySearch>
+      <NumberOfEvents onNumberChanged={
+        (value)=>{
+        console.log('value received from numberof events Component', value );
+        setCurrentNOE(value);
+       }} />
       <EventList events={events} />
     </div>
   );
