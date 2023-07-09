@@ -9,8 +9,7 @@ const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
 // scenario 1
 defineFeature(feature, test => {
-
-    test('WHEN USER HAS NOT SEARCHED FOR A CITY, SHOW UPCOMING EVENTS FROM ALL CITIES', ({ given, when, then }) => {
+    test('The user has not searched for a city, show upcoming events from all cities', ({ given, when, then }) => {
         given('user has not searched for any city', () => {    //nothing has happened yet
 
         });
@@ -32,7 +31,7 @@ defineFeature(feature, test => {
     });
 
 // scenario 2
-    test('USER SHOULD SEE A LIST OF SUGGESTIONS WHEN THEY SEARCH FOR A CITY', ({ given, when, then }) => {
+    test('User should see a list of suggestions when they search for a city', ({ given, when, then }) => {
 
         let AppComponent;
         given('the main page is open', () => {
@@ -56,7 +55,7 @@ defineFeature(feature, test => {
 });
 
 // scenario 3
-test('USER CAN SELECT A CITY FROM THE SUGGESTED LIST', ({ given, and, when, then }) => {
+test('User can select a city from the suggested list', ({ given, and, when, then }) => {
 
     let AppComponent;
     let AppDOM; 

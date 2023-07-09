@@ -1,6 +1,6 @@
 import { loadFeature, defineFeature } from 'jest-cucumber';
 import  userEvent  from '@testing-library/user-event';
-import { render, within, waitFor, queryByText } from '@testing-library/react';
+import { render, within, waitFor} from '@testing-library/react';
 import App from '../App';
 
 
