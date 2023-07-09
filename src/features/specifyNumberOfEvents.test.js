@@ -8,32 +8,24 @@ const feature = loadFeature('./src/features/specifyNumberOfEvents.feature');
 defineFeature(feature, test => {
 
     test('The user has not specified a number, 32 is the default number', ({ given, when, then }) => {
-        let AppComponent;
         let AppDOM;
-        given('the user has not specified the number of events', () => {
-            AppComponent = render(<App />);
-            AppDOM = AppComponent.container.firstChild;
-        });
+    given('the user has not specified the number of events', () => {
+      const AppComponent = render(<App />);
+      AppDOM = AppComponent.container.firstChild;
+    });
 
-        let EventListItems;
-        let EventListDOM;
-        when('the user views the events list', async () => {
 
-            console.log('EventListDOM:', EventListDOM);   //checking where is the error
-
-            EventListDOM = AppDOM.querySelector('#event-list');
-
-            await waitFor(() => {
-                EventListItems = within(EventListDOM).queryAllByRole('listitem');
-
-            console.log('EventListItems:', EventListItems);
-
-            expect(EventListItems.lenght).toBeGreaterThan(0);
-            })
-        });
+        let EventListItems
+    when('the user views the events list', async () => {
+      const EventListDOM = AppDOM.querySelector('#event-list');
+      await waitFor(() => {
+        EventListItems = within(EventListDOM).queryAllByRole('listitem');
+        expect(EventListItems.length).toBeGreaterThan(0);
+      });
+    });
 
         then(/^the default number of events displayed should be (\d+)$/, (arg0) => {
-            expect(EventListItems.lenght).toBe(32);
+            expect(EventListItems.length).toBe(32);
         });
     });
 
