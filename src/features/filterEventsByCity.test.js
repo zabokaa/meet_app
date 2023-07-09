@@ -30,7 +30,7 @@ defineFeature(feature, test => {
             });
         });
     });
-});
+
 // scenario 2
     test('USER SHOULD SEE A LIST OF SUGGESTIONS WHEN THEY SEARCH FOR A CITY', ({ given, when, then }) => {
 
@@ -50,10 +50,10 @@ defineFeature(feature, test => {
 
         then('the user should see a list of cities that match what they have typed', async () => {
                 const suggestionListItems = within(CitySearchDOM).queryAllByRole('listitem'); 
-                expect(suggestionListItems).toHaveLength(2);
+                expect(suggestionListItems).toHaveLength(2);     //2 because of the searched citiy and the option"see all cities"
                 });
         });
-
+});
 
 // scenario 3
 test('USER CAN SELECT A CITY FROM THE SUGGESTED LIST', ({ given, and, when, then }) => {
@@ -61,15 +61,15 @@ test('USER CAN SELECT A CITY FROM THE SUGGESTED LIST', ({ given, and, when, then
     let AppComponent;
     let AppDOM; 
     let CitySearchDOM;
-    let citySearchInput;
+    let CitySearchInput;
 
     given('the user was typing “Berlin” in the city textbox', async () => {
         AppComponent = render(<App />);
-      const user = userEvent.setup();
-      AppDOM = AppComponent.container.firstChild;
-      CitySearchDOM = AppDOM.querySelector('#city-search');
-      citySearchInput = within(CitySearchDOM).queryByRole('textbox');  
-      await user.type(citySearchInput, "Berlin");
+        const user = userEvent.setup();
+        AppDOM = AppComponent.container.firstChild;
+        CitySearchDOM = AppDOM.querySelector('#city-search');
+        CitySearchInput = within(CitySearchDOM).queryByRole('textbox');  
+        await user.type(CitySearchInput, "Berlin");
     });
 
     let suggestionListItems;
@@ -84,7 +84,7 @@ test('USER CAN SELECT A CITY FROM THE SUGGESTED LIST', ({ given, and, when, then
     });
 
     then('their city should be changed to that city', () => {
-        expect(citySearchInput.value).toBe('Berlin, Germany');
+        expect(CitySearchInput.value).toBe('Berlin, Germany');
 
     });
 
@@ -95,7 +95,7 @@ test('USER CAN SELECT A CITY FROM THE SUGGESTED LIST', ({ given, and, when, then
 
       // filtering the list of all events down to events located in Germany
       // citySearchInput.value should have the value "Berlin, Germany" at this point
-      const berlinEvents = allEvents.filter(event => event.location === citySearchInput.value)
+      const berlinEvents = allEvents.filter(event => event.location === CitySearchInput.value)
       expect(EventListItems).toHaveLength(berlinEvents.length);
 
     });
