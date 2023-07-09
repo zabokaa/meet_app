@@ -1,9 +1,8 @@
 import { render, within, waitFor } from '@testing-library/react';
-import { loadFeature} from 'jest-cucumber';  //loading gherkin file - from root - and defining code f the feature
 import App from '../App';
 import userEvent from '@testing-library/user-event';
-import { defineFeature } from 'jest-cucumber';
 import { getEvents } from '../api';
+import { loadFeature, defineFeature } from 'jest-cucumber';
 
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
@@ -19,9 +18,11 @@ defineFeature(feature, test => {
             AppComponent = render(<App />);   //user opening the app
         });
 
+        let AppDOM;
+        let EventListDOM;
         then('the user should see a list of all upcoming events', async () => {  //
-            const AppDOM = AppComponent.container.firstChild;
-            const EventListDOM = AppDOM.querySelector('#event-list');
+            AppDOM = AppComponent.container.firstChild;
+            EventListDOM = AppDOM.querySelector('#event-list');
 
             await waitFor(() => {
                 const EventListItems = within(EventListDOM).queryAllByRole('listitem');
@@ -54,15 +55,16 @@ defineFeature(feature, test => {
         });
 });
 
-// scenario 3
-test('User can select a city from the suggested list', ({ given, and, when, then }) => {
+// scenario 3:
+
+    test('User can select a city from the suggested list', ({ given, and, when, then, and2 }) => {
 
     let AppComponent;
     let AppDOM; 
     let CitySearchDOM;
     let CitySearchInput;
 
-    given('the user was typing “Berlin” in the city textbox', async () => {
+    given('the user was typing Berlin in the city textbox', async () => {
         AppComponent = render(<App />);
         const user = userEvent.setup();
         AppDOM = AppComponent.container.firstChild;
@@ -87,10 +89,10 @@ test('User can select a city from the suggested list', ({ given, and, when, then
 
     });
 
-    and('the user should receive a list of upcoming events in that city', async () => {
+    and2('the user should receive a list of upcoming events in that city', async () => {
         const EventListDOM = AppDOM.querySelector('#event-list');
-      const EventListItems = within(EventListDOM).queryAllByRole('listitem');
-      const allEvents = await getEvents();
+        const EventListItems = within(EventListDOM).queryAllByRole('listitem');
+        const allEvents = await getEvents();
 
       // filtering the list of all events down to events located in Germany
       // citySearchInput.value should have the value "Berlin, Germany" at this point
