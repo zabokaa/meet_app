@@ -3,6 +3,7 @@ import { loadFeature} from 'jest-cucumber';  //loading gherkin file - from root 
 import App from '../App';
 import userEvent from '@testing-library/user-event';
 import { defineFeature } from 'jest-cucumber';
+import { getEvents } from '../api';
 
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
@@ -55,7 +56,7 @@ defineFeature(feature, test => {
 
 
 // scenario 3
-test('USER CAN SELECT A CITY FROM THE SUGGESTED LIST', ({ given, and, when, then, and2 }) => {
+test('USER CAN SELECT A CITY FROM THE SUGGESTED LIST', ({ given, and, when, then }) => {
 
     let AppComponent;
     let AppDOM; 
@@ -87,7 +88,7 @@ test('USER CAN SELECT A CITY FROM THE SUGGESTED LIST', ({ given, and, when, then
 
     });
 
-    and2('the user should receive a list of upcoming events in that city', async () => {
+    and('the user should receive a list of upcoming events in that city', async () => {
         const EventListDOM = AppDOM.querySelector('#event-list');
       const EventListItems = within(EventListDOM).queryAllByRole('listitem');
       const allEvents = await getEvents();
