@@ -57,7 +57,7 @@ defineFeature(feature, test => {
 
 // scenario 3:
 
-    test('User can select a city from the suggested list', ({ given, and, when, then, and2 }) => {
+    test('User can select a city from the suggested list', ({ given, and, when, then }) => {
 
     let AppComponent;
     let AppDOM; 
@@ -89,15 +89,11 @@ defineFeature(feature, test => {
 
     });
 
-    and2('the user should receive a list of upcoming events in that city', async () => {
+    and('the user should receive a list of upcoming events in that city', async () => {
         const EventListDOM = AppDOM.querySelector('#event-list');
         const EventListItems = within(EventListDOM).queryAllByRole('listitem');
         const allEvents = await getEvents();
-
-      // filtering the list of all events down to events located in Germany
-      // citySearchInput.value should have the value "Berlin, Germany" at this point
-      const berlinEvents = allEvents.filter(event => event.location === CitySearchInput.value)
-      expect(EventListItems).toHaveLength(berlinEvents.length);
-
+        const berlinEvents = allEvents.filter(event => event.location === CitySearchInput.value)
+        expect(EventListItems).toHaveLength(berlinEvents.length);
     });
 });
