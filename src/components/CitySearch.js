@@ -23,7 +23,7 @@ const CitySearch = ({ allLocations, onSearchResult}) => {
     const value = event.target.textContent;
     setQuery(value);
     setShowSuggestions(false);
-    // onSearchResult(value);
+    onSearchResult(value);
   };
 
   return (
