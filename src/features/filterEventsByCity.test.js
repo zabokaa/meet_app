@@ -1,19 +1,30 @@
+import { render, within, waitFor } from '@testing-library/react';
 import { loadFeature, defineFeature } from 'jest-cucumber';  //loading gherkin file - from root - and defining code f the feature
+import App from '../App';
+import { getEvents } from '../api';
 
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
+
 defineFeature(feature, test => {
     test('WHEN USER HASN’T SEARCHED FOR A CITY, SHOW UPCOMING EVENTS FROM ALL CITIES.', ({ given, when, then }) => {
-        given('user hasn’t searched for any city', () => {
+        given('user hasn’t searched for any city', () => {    //nothing has happened yet
 
         });
-
+        
+        let AppComponent;
         when('the user opens the app', () => {
-
+            AppComponent = render(<App />);   //user opening the app
         });
 
-        then('the user should see a list of all upcoming events', () => {
+        then('the user should see a list of all upcoming events', async () => {  //
+            const AppDOM = AppComponent.container.firstChild;
+            const EventListDOM = AppDOM.querySelector('#event-list');
 
+            await waitFor(() => {
+                const EventListItems = within(EventListDOM).queryAllByRole('listitem');
+                expect(EventListItems.length).toBe(32);
+            });
         });
     });
 
