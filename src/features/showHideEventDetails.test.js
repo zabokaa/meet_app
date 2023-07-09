@@ -65,16 +65,30 @@ defineFeature(feature, test => {
     });
 
     test('User can collapse an event to hide its details', ({ given, when, then, and }) => {
-        given('an expanded event element', () => {
 
-        });
+        let AppDOM;
+        let ButtonClicked;
+        let EventListItems;
+        given('an expanded event element', async () => {       //user can see event details : reapeat steps from above
+            const user = userEvent.setup();
+            const AppComponent = render(<App />);
+            AppDOM = AppComponent.container.firstChild;
+            const EventListDOM = AppDOM.querySelector('#event-list');
+            await waitFor(() => {
+                EventListItems = within(EventListDOM).queryAllByRole('listitem');
+                ButtonClicked = within(EventListItems[0]).queryByText('show details');
+            });
+            await user.click(ButtonClicked);
+            expect(EventListItems[0].querySelector('.details')).toBeInTheDocument();
+            });
 
-        when('the user clicks on the event element', () => {
-
+        when('the user clicks on the event element', async () => {
+            const user = userEvent.setup();
+            await user.click(ButtonClicked);
         });
 
         then('the event details should be hidden, collapsing the event element', () => {
-
+            expect(EventListItems[0].querySelector('.details')).not.toBeInTheDocument();
         });
 
         and('showing less information about the event', () => {
