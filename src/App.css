@@ -1,4 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
+
+body {
+  background-color: #6B5B95;
+  color: #FFFFFF;
+}
+
 .App {
   text-align: center;
   padding: 2% 5%;
@@ -32,6 +38,7 @@ input[type="number"] {
 
 .city {
   width: 250px;
+  color: #000000;
 }
 
 #city-search {
@@ -43,6 +50,7 @@ input[type="number"] {
 
 .suggestions {
   width: 250px;
+  color: black;
   position: absolute;
   top: 45px;
   z-index: 2;
@@ -55,7 +63,7 @@ input[type="number"] {
 .suggestions > li {
   text-align: left;
   padding: 8px 6px 8px 10px;
-  background-color: #eee;
+  background-color: #EEE;
   cursor: default;
 }
 
@@ -65,20 +73,24 @@ input[type="number"] {
 }
 
 .suggestions > li:hover {
-  background-color: #bcdcdb;
+  background-color: #BCDCDB;
 }
 
 .event {
   padding: 10px 10px 35px;
-  margin-bottom: 10px;
   text-align: left;
-  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  border: 2px solid #BCDCDB;
   border-radius: 4px;
   position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
 }
 
 .details-btn {
   position: absolute;
+  background-color: #BCDCDB;
   right: 5px;
   bottom: 5px;
   padding: 5px 8px;
@@ -86,3 +98,22 @@ input[type="number"] {
   outline: none;
   cursor: pointer;
 }
+
+@media (max-width: 1200px) {
+  .event-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .event-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .event-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+

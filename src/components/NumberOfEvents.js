@@ -12,7 +12,7 @@ const NumberOfEvents = ( {onNumberChanged} ) => {
 
   return (
     <div id="number-of-events">
-      <label htmlFor="number-of-events-input">number of events: </label>
+      <label htmlFor="number-of-events-input">NUMBER OF EVENTS </label>
       <input
         type="text"
         id="number-of-events-input"
