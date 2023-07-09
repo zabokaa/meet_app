@@ -63,6 +63,7 @@ describe('<CitySearch /> component', () => {
     CitySearchComponent.rerender(<CitySearch
       allLocations={allLocations}
       setCurrentCity={() => { }}
+      onSearchResult={() => { }}      //have to include onSearchResult func !
     />);
 
     const cityTextBox = CitySearchComponent.queryByRole('textbox');

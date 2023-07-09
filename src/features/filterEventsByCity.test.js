@@ -1,14 +1,16 @@
 import { render, within, waitFor } from '@testing-library/react';
-import { loadFeature, defineFeature } from 'jest-cucumber';  //loading gherkin file - from root - and defining code f the feature
+import { loadFeature} from 'jest-cucumber';  //loading gherkin file - from root - and defining code f the feature
 import App from '../App';
-import { getEvents } from '../api';
+import userEvent from '@testing-library/user-event';
+import { defineFeature } from 'jest-cucumber';
 
 const feature = loadFeature('./src/features/filterEventsByCity.feature');
 
-
+// scenario 1
 defineFeature(feature, test => {
-    test('WHEN USER HASN’T SEARCHED FOR A CITY, SHOW UPCOMING EVENTS FROM ALL CITIES.', ({ given, when, then }) => {
-        given('user hasn’t searched for any city', () => {    //nothing has happened yet
+
+    test('WHEN USER HAS NOT SEARCHED FOR A CITY, SHOW UPCOMING EVENTS FROM ALL CITIES', ({ given, when, then }) => {
+        given('user has not searched for any city', () => {    //nothing has happened yet
 
         });
         
@@ -27,40 +29,73 @@ defineFeature(feature, test => {
             });
         });
     });
-
+});
+// scenario 2
     test('USER SHOULD SEE A LIST OF SUGGESTIONS WHEN THEY SEARCH FOR A CITY', ({ given, when, then }) => {
-        given('Given the main page is open', () => {
 
+        let AppComponent;
+        given('the main page is open', () => {
+            AppComponent = render(<App />);
         });
 
-        when('user starts typing in the city textbox', () => {
-
+        let CitySearchDOM;  //--> needed in then part as well
+        when('user starts typing in the city textbox', async () => {     //simulatin clicking text box and typing Berlin into it
+            const user = userEvent.setup();
+            const AppDOM = AppComponent.container.firstChild;
+            CitySearchDOM = AppDOM.querySelector('#city-search');
+            const citySearchInput = within(CitySearchDOM).queryByRole('textbox');  
+            await user.type(citySearchInput, "Berlin");
         });
 
-        then('the user should see a list of cities (suggestions) that match what they’ve typed', () => {
-
+        then('the user should see a list of cities that match what they have typed', async () => {
+                const suggestionListItems = within(CitySearchDOM).queryAllByRole('listitem'); 
+                expect(suggestionListItems).toHaveLength(2);
+                });
         });
+
+
+// scenario 3
+test('USER CAN SELECT A CITY FROM THE SUGGESTED LIST', ({ given, and, when, then, and2 }) => {
+
+    let AppComponent;
+    let AppDOM; 
+    let CitySearchDOM;
+    let citySearchInput;
+
+    given('the user was typing “Berlin” in the city textbox', async () => {
+        AppComponent = render(<App />);
+      const user = userEvent.setup();
+      AppDOM = AppComponent.container.firstChild;
+      CitySearchDOM = AppDOM.querySelector('#city-search');
+      citySearchInput = within(CitySearchDOM).queryByRole('textbox');  
+      await user.type(citySearchInput, "Berlin");
     });
 
-    test('USER CAN SELECT A CITY FROM THE SUGGESTED LIST', ({ given, and, when, then }) => {
-        given('the user was typing “Berlin” in the city textbox', () => {
+    let suggestionListItems;
+    and('the list of suggested cities is showing', () => {
+        suggestionListItems = within(CitySearchDOM).queryAllByRole('listitem'); 
+        expect(suggestionListItems).toHaveLength(2);
+    });
 
-        });
+    when('the user selects a city from the list', async () => {
+        const user = userEvent.setup();
+        await user.click(suggestionListItems[0]);
+    });
 
-        and('the list of suggested cities is showing', () => {
+    then('their city should be changed to that city', () => {
+        expect(citySearchInput.value).toBe('Berlin, Germany');
 
-        });
+    });
 
-        when('the user selects a city (e.g., “Berlin, Germany”) from the list', () => {
+    and2('the user should receive a list of upcoming events in that city', async () => {
+        const EventListDOM = AppDOM.querySelector('#event-list');
+      const EventListItems = within(EventListDOM).queryAllByRole('listitem');
+      const allEvents = await getEvents();
 
-        });
+      // filtering the list of all events down to events located in Germany
+      // citySearchInput.value should have the value "Berlin, Germany" at this point
+      const berlinEvents = allEvents.filter(event => event.location === citySearchInput.value)
+      expect(EventListItems).toHaveLength(berlinEvents.length);
 
-        then('their city should be changed to that city (e.g., “Berlin, Germany”)', () => {
-
-        });
-
-        and('the user should receive a list of upcoming events in that city', () => {
-
-        });
     });
 });
