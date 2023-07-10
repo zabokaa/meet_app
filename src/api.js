@@ -30,7 +30,7 @@ export const getEvents = async () => {
     removeQuery(); 
     
     const url = "https://8hhtjxy3sb.execute-api.eu-north-1.amazonaws.com/dev/api/get-events" + "/" + token;
-    const response = await fetch(url);
+    const response = await fetch(url);   //what is the problem here ?? atatus 1 time error
     const result = await response.json();
     if (result) {
       return result.events;
