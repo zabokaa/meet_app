@@ -96,6 +96,14 @@ input[type="number"] {
   cursor: pointer;
 }
 
+.alerts-container {
+  position: fixed;
+  top: 0px;
+  left: 20px;
+  width: 250px;
+  z-index: 1000;
+}
+
 @media (max-width: 1200px) {
   .event {
     grid-template-columns: repeat(3, 1fr);
