@@ -1,13 +1,19 @@
 import { useState } from "react";
 
-const NumberOfEvents = ( {onNumberChanged} ) => {
+const NumberOfEvents = ( {onNumberChanged, setErrorAlert} ) => {
 
   const [number, setNumber] = useState(32);
 
   const handleInputChanged = (event) => {
     const value = event.target.value;
     setNumber(value);
+
     onNumberChanged(value);
+      if (isNaN(value) || value <= 0 || value > 32) {
+        setErrorAlert("please enter a number between 1 and 32.");
+      } else {
+        setErrorAlert("");
+      }    
   }
 
   return (

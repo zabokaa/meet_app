@@ -32,6 +32,7 @@ class Alert extends Component {
   }
 };
 
+// subclass InfoAlert
 class InfoAlert extends Alert {
     constructor(props) {
       super(props);
@@ -40,6 +41,7 @@ class InfoAlert extends Alert {
     }
 };
 
+// subclass ErrorAlert
 class ErrorAlert extends Alert {
     constructor(props) {
       super(props);

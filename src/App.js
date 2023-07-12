@@ -3,7 +3,7 @@ import EventList from './components/EventList';
 import NumberOfEvents from './components/NumberOfEvents';
 import { Component, useEffect, useState } from 'react';
 import { extractLocations, getEvents } from './api';
-import { InfoAlert } from './components/Alert';
+import { InfoAlert, ErrorAlert } from './components/Alert';
 import './App.css';
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
   const [allLocations, setAllLocations] = useState([]);
   const [currentCity, setCurrentCity] = useState("see all cities");
   const [infoAlert, setInfoAlert] = useState("");
+  const [errorAlert, setErrorAlert] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -24,21 +25,20 @@ const App = () => {
       allEvents.filter(event => event.location === currentCity)
     setEvents(filteredEvents.slice(0, currentNOE));
     setAllLocations(extractLocations(allEvents));
-
-
   }
 
   return (
     <div className="App">
       <div className='alerts-container'>        
-        {infoAlert.length ? <InfoAlert text={infoAlert}/> : null}   
+        {infoAlert.length ? <InfoAlert text={infoAlert}/> : null} 
+        {errorAlert.length ? <ErrorAlert text={errorAlert}/> : null} 
       </div>
       <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} setInfoAlert={setInfoAlert} onSearchResult={(value)=>{
         setCurrentCity(value);
       }} />
-      <NumberOfEvents onNumberChanged={
+      <NumberOfEvents setErrorAlert={setErrorAlert} onNumberChanged={
         (value)=>{
-        // console.log('value received from numberof events Component', value );
+        console.log('value received from number of events Component', value );
         setCurrentNOE(value);
        }} />
       <EventList events={events} />

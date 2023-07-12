@@ -9,6 +9,7 @@ describe('<NumberOfEvents /> component', () => {
     NumberOfEventsComponent = render(<NumberOfEvents 
       onNumberChanged={(value)=>{}}
       setInfoAlert={() => { }}
+      setErrorAler={() => { }}
       />);
   });
 
