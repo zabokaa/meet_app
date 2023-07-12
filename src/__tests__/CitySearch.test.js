@@ -9,7 +9,10 @@ import { extractLocations, getEvents } from '../api';
 describe('<CitySearch /> component', () => {
   let CitySearchComponent;
   beforeEach(() => {
-    CitySearchComponent = render(<CitySearch allLocations={[]} />);
+    CitySearchComponent = render(<CitySearch 
+      allLocations={[]}                          //dummy prop funcs so it will be read as a function
+      setInfoAlert={() => { }}          //what is the problem .. I did set a dummy prop
+      />);
   });
 
   test('renders text input', () => {
