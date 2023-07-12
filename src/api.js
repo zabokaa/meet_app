@@ -29,6 +29,7 @@ export const getEvents = async () => {
   if (token) {
     removeQuery(); 
     
+    // eslint-disable-next-line no-useless-concat
     const url = "https://8hhtjxy3sb.execute-api.eu-north-1.amazonaws.com/dev/api/get-events" + "/" + token;
     const response = await fetch(url);   //what is the problem here ?? atatus 1 time error
     const result = await response.json();
@@ -102,6 +103,7 @@ const getToken = async (code) => {
   try {
     const encodeCode = encodeURIComponent(code);
 
+    // eslint-disable-next-line no-useless-concat
     const response = await fetch("https://8hhtjxy3sb.execute-api.eu-north-1.amazonaws.com/dev/api/token" + "/" + encodeCode);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
