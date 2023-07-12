@@ -3,14 +3,15 @@ import EventList from './components/EventList';
 import NumberOfEvents from './components/NumberOfEvents';
 import { Component, useEffect, useState } from 'react';
 import { extractLocations, getEvents } from './api';
-
+import { InfoAlert } from './components/Alert';
 import './App.css';
 
 const App = () => {
   const [events, setEvents] = useState([]);
   const [currentNOE, setCurrentNOE] = useState(32);  //1 of the requirements
   const [allLocations, setAllLocations] = useState([]);
-  const [currentCity, setCurrentCity] = useState("see all cities")
+  const [currentCity, setCurrentCity] = useState("see all cities");
+  const [infoAlert, setInfoAlert] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -29,12 +30,15 @@ const App = () => {
 
   return (
     <div className="App">
-      <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} onSearchResult={(value)=>{
-        setCurrentCity(value);}
-      }></CitySearch>
+      <div className='alerts-container'>        
+        {infoAlert.length ? <InfoAlert text={infoAlert}/> : null}   
+      </div>
+      <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} setInfoAlert={setInfoAlert} onSearchResult={(value)=>{
+        setCurrentCity(value);
+      }} />
       <NumberOfEvents onNumberChanged={
         (value)=>{
-        console.log('value received from numberof events Component', value );
+        // console.log('value received from numberof events Component', value );
         setCurrentNOE(value);
        }} />
       <EventList events={events} />
