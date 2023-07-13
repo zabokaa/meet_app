@@ -12,11 +12,11 @@ class Alert extends Component {
       color: this.color,
       backgroundColor: this.bgColor,
       borderWidth: "2px",
-      borderStyle: "solid",
+      borderStyle: "dotted",
       fontWeight: "bolder",
       borderRadius: "7px",
       borderColor: this.color,
-      textAlign: "center",
+      textAlign: "left",
       fontSize: "12px",
       margin: "10px 0",
       padding: "10px"
@@ -50,4 +50,13 @@ class ErrorAlert extends Alert {
     }
 };
 
-export {InfoAlert, ErrorAlert}; 
+// warningAlert . exc. 4.9
+class WarningAlert extends Alert {
+  constructor(props) {
+    super(props);
+    this.color = 'rgb(210,105,30)';   
+    this.bgColor = 'rgb(231,146,86)'; 
+  }
+};
+
+export {InfoAlert, ErrorAlert, WarningAlert}; 
