@@ -96,7 +96,8 @@ input[type="number"] {
   cursor: pointer;
 }
 
-.alerts-container {
+/* still have to customize */
+.alerts-container {   
   position: fixed;
   top: 0px;
   left: 20px;
