@@ -8,7 +8,6 @@ describe('<NumberOfEvents /> component', () => {
   beforeEach(() => {
     NumberOfEventsComponent = render(<NumberOfEvents 
       onNumberChanged={(value)=>{}}
-      setInfoAlert={() => { }}
       setErrorAler={() => { }}
       />);
   });
@@ -30,7 +29,8 @@ describe('<NumberOfEvents /> component', () => {
   test('user specifies a new number to display the specified number ', async () => {
     const user = userEvent.setup();
     const numberTextBox = NumberOfEventsComponent.queryByRole('textbox');
-    await user.type(numberTextBox, "10")
+    await user.type(numberTextBox, '{backspace}{backspace}5');
+    expect(numberTextBox).toHaveValue("5");
   });
 });
 
