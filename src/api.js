@@ -1,4 +1,5 @@
 import  mockData  from './mock-data';
+import NProgress from "nprogres";
 
 /**
  *
@@ -24,6 +25,12 @@ export const getEvents = async () => {
     return mockData;
   }
 
+  if (!navigator.onLine) {
+    const events = localStorage.getItem("lastEvents");
+    NProgress.done();
+    return events?JSON.parse(events):[];
+  }
+  
   const token = await getAccessToken();
 
   if (token) {
@@ -33,7 +40,12 @@ export const getEvents = async () => {
     const url = "https://8hhtjxy3sb.execute-api.eu-north-1.amazonaws.com/dev/api/get-events" + "/" + token;
     const response = await fetch(url);   //what is the problem here ?? atatus 1 time error
     const result = await response.json();
+    // if (result) {
+    //   return result.events;
+    // } else return null;
     if (result) {
+      NProgress.done();
+      localStorage.setItem("lastEvents", JSON.stringify(result.events));   //cached event data under key 'lastEvents'
       return result.events;
     } else return null;
   }
