@@ -1,5 +1,5 @@
 import  mockData  from './mock-data';
-import NProgress from "nprogres";
+import NProgress from "nprogress";
 
 /**
  *
@@ -30,7 +30,7 @@ export const getEvents = async () => {
     NProgress.done();
     return events?JSON.parse(events):[];
   }
-  
+
   const token = await getAccessToken();
 
   if (token) {
