@@ -8,7 +8,7 @@ describe('<NumberOfEvents /> component', () => {
   beforeEach(() => {
     NumberOfEventsComponent = render(<NumberOfEvents 
       onNumberChanged={(value)=>{}}
-      setErrorAler={() => { }}
+      setErrorAlert={() => { }}
       />);
   });
 
