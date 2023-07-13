@@ -98,9 +98,9 @@ input[type="number"] {
 
 /* still have to customize */
 .alerts-container {   
-  position: fixed;
-  top: 0px;
-  left: 20px;
+  position: absolute;
+  top: 30px;
+  left: 95px;
   width: 250px;
   z-index: 1000;
 }
