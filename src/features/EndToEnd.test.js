@@ -10,7 +10,7 @@ describe('show/hide an event details', () => {
       slowMo: 50,
     });
     page = await browser.newPage();
-    await page.goto('http://localhost:3000/');
+    await page.goto('http://localhost:3000/meet_app');
     await page.waitForSelector('.event');
   });
 
@@ -51,7 +51,7 @@ describe('Filter events by city.', () => {
       slowMo: 50,
     });
     page = await browser.newPage();
-    await page.goto('http://localhost:3000/');
+    await page.goto('http://localhost:3000/meet_app');
     await page.waitForSelector('.event');
     eventListItems = await page.$$('.event');
   });

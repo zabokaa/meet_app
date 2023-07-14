@@ -15,7 +15,7 @@ const App = () => {
   const [errorAlert, setErrorAlert] = useState("");
   const [warningAlert, setWarningAlert] = useState("");
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     if (navigator.onLine) {
       setWarningAlert(""); // Empty string when online
@@ -23,6 +23,7 @@ const App = () => {
       setWarningAlert("you are currently offline"); // alertText when offline
     }
     fetchData();
+    // eslint-disable-next-line 
   }, [currentCity, currentNOE]);
 
   const fetchData = async () => {
