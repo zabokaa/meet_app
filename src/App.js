@@ -52,6 +52,9 @@ const App = () => {
         console.log('value received from number of events Component', value );
         setCurrentNOE(value);
        }} />
+      <div className='charts-container'>
+        <CityEventsChart allLocations={allLocations} events={events} />
+      </div>
       <EventList events={events} />
     </div>
   );
