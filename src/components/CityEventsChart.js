@@ -22,6 +22,26 @@ const CityEventsChart = ({ allLocations, events }) => {
       })
       return data;
     };
-  }
+  
+    // scatterchart from recharts
+  return (
+    <ResponsiveContainer width="99%" height={400}>
+      <ScatterChart
+        margin={{
+          top: 20,
+          right: 20,
+          bottom: 20,
+          left: 20,
+        }}
+      >
+        <CartesianGrid />
+        <XAxis type="category" dataKey="city" name="city" stroke="white" />
+        <YAxis type="number" dataKey="count" name="NOE" stroke="white" />
+        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+        <Scatter name="NOE by city" data={data} fill="#8884d8" />
+      </ScatterChart>
+    </ResponsiveContainer>
+  );
+}
 
 export default CityEventsChart;
