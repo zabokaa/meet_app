@@ -17,7 +17,7 @@ const CityEventsChart = ({ allLocations, events }) => {
     const getData = () => {
       const data = allLocations.map((location) => {
       const count = events.filter((event) => event.location === location).length
-        const city = location.split(', ')[0]      //to receive name of city
+        const city = location.split((/, | - /))[0]      //to receive name of city
         return { city, count };     //same as {city: city, count: count}
       })
       return data;
@@ -30,15 +30,15 @@ const CityEventsChart = ({ allLocations, events }) => {
         margin={{
           top: 20,
           right: 20,
-          bottom: 20,
+          bottom: 80,
           left: 20,
         }}
       >
         <CartesianGrid />
-        <XAxis type="category" dataKey="city" name="city" stroke="white" />
-        <YAxis type="number" dataKey="count" name="NOE" stroke="white" />
+        <XAxis type="category" dataKey="city" name="city" stroke="#BCDCDB" angle={60} interval={0} tick={{ dx: 20, dy: 40, fontSize: 14 }}/>
+        <YAxis type="number" dataKey="count" name="no of events" stroke="#BCDCDB" />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-        <Scatter name="NOE by city" data={data} fill="#8884d8" />
+        <Scatter name="NOE by city" data={data} fill="#BCDCDB" />
       </ScatterChart>
     </ResponsiveContainer>
   );
