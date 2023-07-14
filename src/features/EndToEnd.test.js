@@ -26,14 +26,14 @@ describe('show/hide an event details', () => {
   });
 
   test('User can expand an event to see its details', async () => {
-    await page.click('.event .details-btn');
+    await page.click('.event .details-btn', { timeout: 5000 });
     await page.waitForSelector('.event .details'); // Wait for the details to appear
     const eventDetails = await page.$('.event .details');
     expect(eventDetails).toBeDefined();
   });
 
   test('User can collapse an event to hide its details', async () => {
-    await page.click('.event .details-btn');
+    await page.click('.event .details-btn', { timeout: 5000 });
     await page.waitForSelector('.event .details', { hidden: true }); // Wait for the details to disappear
     const eventDetails = await page.$('.event .details');
     expect(eventDetails).toBeNull();
@@ -68,14 +68,14 @@ describe('Filter events by city.', () => {
 
   test('User should see a list of suggestions when they search for a city', async () => {
     await page.type('.city', 'Berlin');
-    await page.waitForSelector('.suggestions li'); // Wait for the suggestion list to appear
+    await page.waitForSelector('.suggestions li', { timeout: 5000 }); // Wait for the suggestion list to appear
     const suggestionListItems = await page.$$('.suggestions li');
     expect(suggestionListItems.length).toBeGreaterThan(0);
   });
 
   test('User can select a city from the suggested list', async () => {
     await page.type('.city', 'Berlin');
-    await page.waitForSelector('.suggestions li'); // Wait for the suggestion list to appear
+    await page.waitForSelector('.suggestions li', { timeout: 5000 }); // Wait for the suggestion list to appear
     const suggestionText = await page.$eval('.suggestions li:first-child', (el) => el.textContent);
     await page.click('.suggestions li:first-child');
     const citySearchInputValue = await page.$eval('.city', (el) => el.value);
