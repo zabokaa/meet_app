@@ -37,6 +37,8 @@ const App = () => {
 
   return (
     <div className="App">
+      {/* hier noch logo evtl  */}
+      <h1>- MEET - app -</h1>
       <div className='alerts-container'>        
         {infoAlert.length ? <InfoAlert text={infoAlert}/> : null} 
         {errorAlert.length ? <ErrorAlert text={errorAlert}/> : null} 
