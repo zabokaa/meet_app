@@ -116,14 +116,22 @@ input[type="number"] {
   grid-template-columns: 1fr 1fr
 }
 
-/* @media (max-width: 1200px) {
-  .event {
-    grid-template-columns: repeat(3, 1fr);
+.events-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+
+@media (max-width: 1200px) {
+  .events-container {
+    grid-template-columns: repeat(2, 1fr);
   }
-} */
+}
 
 @media (max-width: 768px) {
-  .charts-container {
+  .charts-container,
+  .events-container {
     grid-template-columns: 1fr;
   }
 }
