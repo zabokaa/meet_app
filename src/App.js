@@ -58,7 +58,7 @@ const App = () => {
         <CityEventsChart allLocations={allLocations} events={events} />
         <EventGenresChart events={events} />
       </div>
-      <EventList events={events} />
+      <EventList events={events} /> 
     </div>
   );
 }

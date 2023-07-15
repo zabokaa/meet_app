@@ -102,7 +102,7 @@ input[type="number"] {
   cursor: pointer;
 }
 
-/* still have to customize */
+
 .alerts-container {   
   position: absolute;
   top: 30px;
@@ -111,20 +111,20 @@ input[type="number"] {
   z-index: 1000;
 }
 
-@media (max-width: 1200px) {
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr
+}
+
+/* @media (max-width: 1200px) {
   .event {
     grid-template-columns: repeat(3, 1fr);
   }
-}
+} */
 
 @media (max-width: 768px) {
-  .event {
-    grid-template-columns: repeat(2, 1fr);
+  .charts-container {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 480px) {
-  .event {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}

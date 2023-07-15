@@ -38,7 +38,7 @@ const CityEventsChart = ({ allLocations, events }) => {
         <XAxis type="category" dataKey="city" name="city" stroke="#BCDCDB" angle={60} interval={0} tick={{ dx: 20, dy: 40, fontSize: 14 }}/>
         <YAxis type="number" dataKey="count" name="no of events" allowDecimals={false} stroke="#BCDCDB" />
         <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-        <Scatter name="NOE by city" data={data} fill="#BCDCDB" />
+        <Scatter name="NOE by city" data={data} fill="#ff6361" />
       </ScatterChart>
     </ResponsiveContainer>
   );

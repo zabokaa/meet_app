@@ -25,10 +25,8 @@ const EventGenresChart = ({ events }) => {
 			<PieChart>
 				<Pie
 					data={data}
-					cx={200}
-					cy={200}
 					labelLine={false}
-					outerRadius={80}
+					outerRadius={150}
 					fill="#8884d8"
 					dataKey="value"
 					label={({ genre, percent }) => `${genre} ${(percent * 100).toFixed(0)}%`}>
