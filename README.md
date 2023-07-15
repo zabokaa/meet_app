@@ -1,5 +1,7 @@
 # :purple_circle: *MEET App* :purple_circle:
 
+![deployed app](./assets/img/MEETappPIC.png?raw=true "pic of deployed app")
+
 ## table of contents
 * [objective](#objective)
 * [key features](#key-features)
