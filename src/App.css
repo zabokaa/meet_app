@@ -116,11 +116,11 @@ input[type="number"] {
   grid-template-columns: 1fr 1fr
 }
 
-.events-container {
+/* .events-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
-}
+} */
 
 
 @media (max-width: 1200px) {
@@ -130,8 +130,8 @@ input[type="number"] {
 }
 
 @media (max-width: 768px) {
-  .charts-container,
-  .events-container {
+  /* .events-container, */
+  .charts-container {
     grid-template-columns: 1fr;
   }
 }

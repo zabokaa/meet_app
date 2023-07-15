@@ -57,14 +57,8 @@ const App = () => {
       <div className='charts-container'>
         <CityEventsChart allLocations={allLocations} events={events} />
         <EventGenresChart events={events} />
-      </div>
-      <div className="events-container">
-        {events.map((event, index) => (
-          <div className="event" key={index}>
-            <EventList events={events} />
-          </div>
-        ))}
-      </div>
+      </div>      
+          <EventList events={events} />    
     </div>
 
  
